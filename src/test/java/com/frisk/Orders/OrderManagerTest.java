@@ -4,8 +4,8 @@ import com.frisk.Observer.CEO;
 import com.frisk.Observer.OrderObserver;
 import com.frisk.Users.Customer;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class OrderManagerTest {
 
@@ -64,14 +64,13 @@ public class OrderManagerTest {
     public void testNotifyOrderCompleted() {
         Customer customer = new Customer("test", "test", "test", "test");
         Order order = new Order(customer);
-        OrderManager.addOrder(order);
 
-        TestObserver testObserver = new TestObserver();
-        OrderManager.addObserver(testObserver);
+        OrderObserver observer = mock(OrderObserver.class);
+        OrderManager.addObserver(observer);
 
         OrderManager.notifyOrderCompleted(order);
 
-        assertTrue(testObserver.wasNotified());
+        verify(observer).onOrderCompleted(order);
     }
 
     @Test
@@ -79,11 +78,11 @@ public class OrderManagerTest {
         Customer customer = new Customer("test", "test", "test", "test");
         Order order = new Order(customer);
 
-        TestObserver testObserver = new TestObserver();
-        OrderManager.addObserver(testObserver);
+        OrderObserver observer = mock(OrderObserver.class);
+        OrderManager.addObserver(observer);
 
         OrderManager.addOrder(order);
 
-        assertTrue(testObserver.wasNotified());
+        verify(observer).onOrderPlaced(order);
     }
 }

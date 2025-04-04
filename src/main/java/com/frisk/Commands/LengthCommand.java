@@ -4,11 +4,11 @@ import com.frisk.BusinessObjects.ClothingItem;
 import com.frisk.BusinessObjects.Pants;
 import com.frisk.Enums.Length;
 
-public class LeangthCommand implements Command {
+public class LengthCommand implements Command {
 
     private final Length length;
 
-    public LeangthCommand(Length length) {
+    public LengthCommand(Length length) {
         this.length = length;
     }
 

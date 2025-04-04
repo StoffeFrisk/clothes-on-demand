@@ -1,28 +1,65 @@
 package com.frisk.Commands;
 
+import com.frisk.Builders.ClothingBuilder;
 import com.frisk.BusinessObjects.ClothingItem;
+import com.frisk.BusinessObjects.Pants;
+import com.frisk.BusinessObjects.Skirt;
+import com.frisk.BusinessObjects.TShirt;
 import com.frisk.Enums.*;
 
 public class ClothingFactory {
 
-    public static ClothingItem createSkirt(Size size, Material material, Colour colour, Waist waist, Pattern pattern) {
-        ClothingCommand invoker = new ClothingCommand();
-        Command command = new CreateSkirtCommand(size, material, colour, waist, pattern);
-        invoker.setCommand(command);
-        return invoker.executeCommand();
+    public static Skirt createSkirt(ClothingBuilder builder, Waist waist, Pattern pattern) {
+        Skirt skirt = new Skirt();
+
+        skirt.setId(builder.getId());
+        skirt.setName(builder.getName());
+        skirt.setPrice(builder.getPrice());
+        skirt.setSize(builder.getSize());
+        skirt.setMaterial(builder.getMaterial());
+        skirt.setColour(builder.getColour());
+
+        CommandPipeline pipeline = new CommandPipeline();
+        pipeline.addCommand(new WaistCommand(waist));
+        pipeline.addCommand(new PatternCommand(pattern));
+        pipeline.executeCommands(skirt);
+
+        return skirt;
     }
 
-    public static ClothingItem createPants(Size size, Material material, Colour colour, Fit fit, Length length) {
-        ClothingCommand invoker = new ClothingCommand();
-        Command command = new CreatePantsCommand(size, material, colour, fit, length);
-        invoker.setCommand(command);
-        return invoker.executeCommand();
+    public static Pants createPants(ClothingBuilder builder, Fit fit, Length length) {
+        Pants pants = new Pants();
+
+        pants.setId(builder.getId());
+        pants.setName(builder.getName());
+        pants.setPrice(builder.getPrice());
+        pants.setSize(builder.getSize());
+        pants.setMaterial(builder.getMaterial());
+        pants.setColour(builder.getColour());
+
+        CommandPipeline pipeline = new CommandPipeline();
+        pipeline.addCommand(new FitCommand(fit));
+        pipeline.addCommand(new LengthCommand(length));
+        pipeline.executeCommands(pants);
+
+        return pants;
     }
 
-    public static ClothingItem createTShirt(Size size, Material material, Colour colour, Sleeve sleeve, Neck neck) {
-        ClothingCommand invoker = new ClothingCommand();
-        Command command = new CreateTShirtCommand(size, material, colour, sleeve, neck);
-        invoker.setCommand(command);
-        return invoker.executeCommand();
+    public static TShirt createTShirt(ClothingBuilder builder, Sleeve sleeve, Neck neck) {
+        TShirt tShirt = new TShirt();
+
+        tShirt.setId(builder.getId());
+        tShirt.setName(builder.getName());
+        tShirt.setPrice(builder.getPrice());
+        tShirt.setSize(builder.getSize());
+        tShirt.setMaterial(builder.getMaterial());
+        tShirt.setColour(builder.getColour());
+
+        CommandPipeline pipeline = new CommandPipeline();
+        pipeline.addCommand(new SleeveCommand(sleeve));
+        pipeline.addCommand(new NeckCommand(neck));
+        pipeline.executeCommands(tShirt);
+
+        return tShirt;
     }
 }

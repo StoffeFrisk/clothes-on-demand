@@ -11,6 +11,7 @@ public class ClothingBuilder {
     protected Material material;
     protected Colour colour;
 
+
     public ClothingBuilder setId(int id) {
         this.id = id;
         return this;
@@ -41,4 +42,27 @@ public class ClothingBuilder {
         return this;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public Colour getColour() {
+        return colour;
+    }
 }

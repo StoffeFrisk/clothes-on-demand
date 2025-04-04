@@ -7,6 +7,7 @@ import com.frisk.Orders.OrderManager;
 import com.frisk.Users.Customer;
 import com.frisk.Commands.ClothingFactory;
 import com.frisk.Enums.*;
+import com.frisk.Builders.ClothingBuilder;
 
 import java.util.Scanner;
 
@@ -74,7 +75,7 @@ public class WebShop {
             System.out.print("Välj en av alternativen: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Konsumera newline
 
             if (choice == 4) {
                 if (order.getItems().isEmpty()) {
@@ -115,7 +116,15 @@ public class WebShop {
         Waist waist = askForWaist();
         Pattern pattern = askForPattern();
 
-        return ClothingFactory.createSkirt(size, material, colour, waist, pattern);
+        ClothingBuilder builder = new ClothingBuilder()
+                .setId(1001)
+                .setName("Skirt")
+                .setPrice(299.95)
+                .setSize(size)
+                .setMaterial(material)
+                .setColour(colour);
+
+        return ClothingFactory.createSkirt(builder, waist, pattern);
     }
 
     private static ClothingItem createPants() {
@@ -126,7 +135,15 @@ public class WebShop {
         Fit fit = askForFit();
         Length length = askForLength();
 
-        return ClothingFactory.createPants(size, material, colour, fit, length);
+        ClothingBuilder builder = new ClothingBuilder()
+                .setId(1003)
+                .setName("Pants")
+                .setPrice(599.50)
+                .setSize(size)
+                .setMaterial(material)
+                .setColour(colour);
+
+        return ClothingFactory.createPants(builder, fit, length);
     }
 
     private static ClothingItem createTShirt() {
@@ -137,7 +154,15 @@ public class WebShop {
         Sleeve sleeve = askForSleeve();
         Neck neck = askForNeck();
 
-        return ClothingFactory.createTShirt(size, material, colour, sleeve, neck);
+        ClothingBuilder builder = new ClothingBuilder()
+                .setId(1002)
+                .setName("T-Shirt")
+                .setPrice(399.90)
+                .setSize(size)
+                .setMaterial(material)
+                .setColour(colour);
+
+        return ClothingFactory.createTShirt(builder, sleeve, neck);
     }
 
     private static String formatEnumInput(String input) {
