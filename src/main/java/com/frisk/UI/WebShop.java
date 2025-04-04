@@ -75,7 +75,7 @@ public class WebShop {
             System.out.print("Välj en av alternativen: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Konsumera newline
+            scanner.nextLine();
 
             if (choice == 4) {
                 if (order.getItems().isEmpty()) {

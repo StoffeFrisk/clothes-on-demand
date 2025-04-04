@@ -1,7 +1,6 @@
 package com.frisk.Commands;
 
 import com.frisk.Builders.ClothingBuilder;
-import com.frisk.BusinessObjects.ClothingItem;
 import com.frisk.BusinessObjects.Pants;
 import com.frisk.BusinessObjects.Skirt;
 import com.frisk.BusinessObjects.TShirt;
